@@ -1,0 +1,46 @@
+<br />
+<div class="container">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">*</th>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">SubTotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of resultDataArray, let i = index">
+                <th scope="row"><a (click)="removeCartItem(data,i)" style="color: red;"><i class="fa fa-times-circle"
+                    aria-hidden="true"></i></a></th>
+                <th><img src="{{data[0].picture}}" style="width: 50px;"></th>
+                <td>{{data[0].title}}</td>
+                <td>{{data[0].price}}</td>
+                <td>{{qty}}</td>
+                <td>{{data[0].price * qty}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+            <h3>Cart Totals</h3>
+            <div class="row">
+                <div class="col-md-4">Sub Total</div>
+                <div class="col-md-8">USD {{total}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">Shipping</div>
+                <div class="col-md-8">Free Shipping</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">Sub Total</div>
+                <div class="col-md-8">USD {{total}}</div>
+            </div>
+        </div>
+    </div>
+</div>

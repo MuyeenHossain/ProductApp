@@ -1,0 +1,69 @@
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Shop</h3>
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <select class="form-control" (change)="onChangeFilter($event.target.value)">
+                        <option selected>Default</option>
+                        <option value="Low">Low To High</option>
+                        <option value="High">High To Low</option>
+                    </select>
+                </div>
+                <div class="container" style="padding-top: 10px;">
+                    <div class="row">
+                        <div class="col-md-4" *ngFor="let data of productList | paginate: { itemsPerPage: 9, currentPage: p }; let i = index" style="padding-top: 10px;">
+                            <div class="products">
+                                <div class="img-sec">
+                                    <img src="{{data.picture}}" style="width: 200px;">
+                                </div>
+                                <div class="title-sec">
+                                    <!-- <a (click)="viewDetails(data._id)"><b>{{data.title}}</b></a> -->
+                                    <a [routerLink]="['/product/', data._id]"><b>{{data.title}}</b></a>
+                                </div>
+                                <div class="available-products">
+                                    <span>Available Products: {{data.stock}}</span>
+                                </div>
+                                <div class="price-sec">
+                                    <span>USD {{data.price}}</span>
+                                </div>
+                                <div class="cart-section">
+                                    <button (click)="AddToCart(i,data.stock)">Add To Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Cart</h3>
+            <div class="col-md-12" *ngIf="items.length == '0'">
+                <div class="alert alert-warning">No Products in the Cart</div>
+            </div>
+            <div class="col-md-12" *ngFor="let data of items; let i = index">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a (click)="removeCartItem(data,i)" style="color: red;"><i class="fa fa-times-circle"
+                            aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-6">
+                        {{data.title}} 1 x {{data.price}}
+                    </div>
+                    <div class="col-md-4">
+                        <img src="{{data.picture}}" style="width: 50px;">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <b *ngIf="items.length > '0'">SubTotal: {{subTotal}}</b>
+            <div class="col-md-12" *ngIf="items.length > '0'">
+                <button class="btn btn-secondary" (click)="viewCart()">View Cart</button> &nbsp; 
+                <button class="btn btn-secondary" (click)="viewCart()">ChceckOut</button>
+            </div>
+        </div>
+    </div>
+</div>
